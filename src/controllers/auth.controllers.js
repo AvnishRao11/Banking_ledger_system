@@ -1,5 +1,6 @@
 import userModel from '../models/user.model.js'
 import jwt from 'jsonwebtoken'
+import { SendRegistrationUserName } from '../services/email.service.js';
 /**
  * - userRegisterController 
  * - POST /api/auth/register
@@ -34,8 +35,8 @@ export const registerUserController = async (req, res) => {
             name:user.name
         },
         message:"user created successfully",
-
     })
+    await SendRegistrationUserName(user.email,user.name);
 }
 /**
  * - loginUserController

@@ -1,6 +1,7 @@
-import ('dotenv').config();
+import dotenv from 'dotenv'
 import nodemailer from "nodemailer"
-const nodemailer = nodemailer();
+
+dotenv.config();
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -39,5 +40,12 @@ const sendEmail = async (to, subject, text, html) => {
     console.error('Error sending email:', error);
   }
 };
+export const SendRegistrationUserName = async(userEmail, name) => {
+  const subject = 'Welcome To Backend_Ledger';
+  const text = `Hello ${name}.\n\n Thank You for registering at Backend Ledger. We are excited to have you on board! If you have any questions or need assistance, feel free to reach out to our support team.`;
+  const html = `<p>Hello ${name},</p><p>Thank You for registering at Backend Ledger. We are excited to have you on board! If you have any questions or need assistance, feel free to reach out to our support team.</p>`;
+  await sendEmail(userEmail, subject, text, html);
 
-module.exports = sendEmail;
+}
+
+
