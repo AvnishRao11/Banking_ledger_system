@@ -9,6 +9,7 @@ app.use(cookieParser());
  */
 import authRouter from './routes/auth.routes.js'
 import accountRouter from './routes/account.routes.js'
+import transactionRouter from './routes/transcation.routes.js'
 
 /**
  * -  User-defined  Routes used 
@@ -16,7 +17,7 @@ import accountRouter from './routes/account.routes.js'
 
 app.use('/api/auth', authRouter);
 app.use('/api/accounts',accountRouter)
-// app.use('/api/transcation',transactionRouter);
+app.use('/api/transaction',transactionRouter);
 
 
 export default app;

@@ -1,4 +1,5 @@
 import userModel from '../models/user.model.js'
+import tokenBlacklistModel from '../models/Blacklist.model.js'
 import jwt from 'jsonwebtoken'
 import { SendRegistrationUserName } from '../services/email.service.js';
 /**
@@ -72,4 +73,25 @@ export const loginUserController=async(req,res)=>{
 
     })
 
+}
+/***
+ * -logoutUserController
+ * -POST/api/auth/logout
+ */
+export const logoutUserController=async(req,res)=>{
+    const token=req.cookies?.token || req.headers?.authorization?.split(" ")[1];
+    if(!token){
+        return res.status(400).json({
+            message:"Token not found"
+        })
+    }
+    res.clearCookie("token");
+    
+    await tokenBlacklistModel.create({
+        token:token,
+    })
+
+    return res.status(200).json({
+        message:"Logged out successfully"
+    })
 }

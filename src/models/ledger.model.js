@@ -1,13 +1,13 @@
-import mongosse from 'mongoose'
-const ledgerSchema=new mongosse.Schema({
+import mongoose from 'mongoose'
+const ledgerSchema=new mongoose.Schema({
     account:{
-        type:mongosse.Schema.Types.ObjectId ,
+        type:mongoose.Schema.Types.ObjectId ,
         ref:"account",
         required:[true,"Ledger must be associated with an account"],
         index:true,
         immutable:true,
     },
-    amount:{
+    Amount:{
         type:Number,
         required:[true,"Amount is required to create a ledger entry"],
         immutable:true, 
@@ -44,6 +44,6 @@ ledgerSchema.pre('findOneAndReplace',preventLedgerModifications);
 
 
 
-const ledgerModel=mongosse.model("ledger",ledgerSchema);
+const ledgerModel=mongoose.model("ledger",ledgerSchema);
 
 export default ledgerModel;

@@ -48,4 +48,16 @@ export const SendRegistrationUserName = async(userEmail, name) => {
 
 }
 
+export const sendTransactionEmail=async(userEmail, amount, transactionId)=>{
+  const subject = 'Transaction Notification';
+  const text = `Hello,\n\n A transaction of amount ${amount} has been processed with Transaction ID: ${transactionId}. If you have any questions or need assistance, feel free to reach out to our support team.`;
+  const html = `<p>Hello,</p><p>A transaction of amount ${amount} has been processed with Transaction ID: ${transactionId}. If you have any questions or need assistance, feel free to reach out to our support team.</p>`;
+  await sendEmail(userEmail, subject, text, html);
+}
 
+export const SendTransactionFailureEmail=async(userEmail, amount, transactionId)=>{
+  const subject = 'Transaction Failure Notification';
+  const text = `Hello,\n\n We regret to inform you that a transaction of amount ${amount} with Transaction ID: ${transactionId} has failed. Please check your account and try again. If you have any questions or need assistance, feel free to reach out to our support team.`; 
+  const html = `<p>Hello,</p><p>We regret to inform you that a transaction of amount ${amount} with Transaction ID: ${transactionId} has failed. Please check your account and try again. If you have any questions or need assistance, feel free to reach out to our support team.</p>`;
+  await sendEmail(userEmail, subject, text, html); 
+}
