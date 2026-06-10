@@ -15,6 +15,10 @@ import transactionRouter from './routes/transcation.routes.js'
  * -  User-defined  Routes used 
  **/
 
+app.get("/", (req, res) => {
+    res.send("Welcome to Ledger Banking API");
+})
+
 app.use('/api/auth', authRouter);
 app.use('/api/accounts',accountRouter)
 app.use('/api/transaction',transactionRouter);
